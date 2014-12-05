@@ -11,8 +11,6 @@ public class Bebedor
     private String nombreBebedor ;
     //indica el valor tota del alcohol en sangre
     private int alcoholSangre;
-    //indica la acumulacion de alcohol en sangre con cada copa
-    private int contadorAlcoholSangre;
     //indica el limite de alcohol en sangre
     private int limit;
     
@@ -24,7 +22,6 @@ public class Bebedor
     {
        nombreBebedor         = newNombreBebedor;
        alcoholSangre         = 0;
-       contadorAlcoholSangre = 0;
        limit                 = 15;
     }
 
@@ -33,13 +30,16 @@ public class Bebedor
      */
     public void beberCopa(Cubata nombreCopa)
     {
-        contadorAlcoholSangre= nombreCopa.getCantidad() ;//se almacena la cantidad de alcohol bebido
-        alcoholSangre = alcoholSangre + contadorAlcoholSangre;//acumula alcohol en sangre tras beber copa
-        
-        if(alcoholSangre>limit)//supera el limite
+        if(alcoholSangre>=limit)//supera el limite
         {
             System.out.println("No quiero mas copas");
-        }    
+        }
+        else //no supera el limite
+        {
+            
+            alcoholSangre = alcoholSangre + nombreCopa.getCantidad();//acumula alcohol en sangre tras beber copa
+        }
+        
         
     }  
     /**
@@ -49,7 +49,11 @@ public class Bebedor
     {
         int letrasPregunta; 
         letrasPregunta = pregunta.length();//calcula el numero de letras de la pregunta
-        if(alcoholSangre<limit && !(pregunta.contains(nombreBebedor)))
+        if(alcoholSangre>limit || (pregunta.contains(nombreBebedor)))
+        {
+            System.out.println(pregunta.toUpperCase());//responde repitiendo la pregunta gritando
+        }
+        else //el nivel de alcohol en sangre es menor que el limite y no contiene el nombre del bebedor
         {
             if(letrasPregunta%2==0)//si el numero de letras es par
             {
@@ -59,15 +63,6 @@ public class Bebedor
             {
                 System.out.println("No");
             }   
-        }
-        else if(pregunta.contains(nombreBebedor)) //si la pregunta contiene el nombre del bebedor
-        {
-            System.out.println(pregunta.toUpperCase());
-        }    
-        
-        else //supera el limite de alcohol 
-        {
-            System.out.println(pregunta.toUpperCase());
         }    
     }       
 }
