@@ -28,5 +28,13 @@ public class Cubata
     public int getCantidad()
     {
         return cantidad;
+    } 
+    
+    /**
+     * metodo que devuelve el nombre de la copa
+     */
+    public String getNombreCopa()
+    {
+        return nombreCopa;
     }   
 }

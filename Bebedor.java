@@ -13,6 +13,10 @@ public class Bebedor
     private int alcoholSangre;
     //indica el limite de alcohol en sangre
     private int limit;
+    //indica si el bebedor esta consciente
+    private boolean consciente;
+    //indica el nombre de la ultima copa
+    private String ultimaCopa;
     
 
     /**
@@ -23,6 +27,8 @@ public class Bebedor
        nombreBebedor         = newNombreBebedor;
        alcoholSangre         = 0;
        limit                 = 15;
+       consciente            = true;
+       ultimaCopa            = null;
     }
 
     /**
@@ -30,14 +36,26 @@ public class Bebedor
      */
     public void beberCopa(Cubata nombreCopa)
     {
+        
+        
         if(alcoholSangre>=limit)//supera el limite
         {
             System.out.println("No quiero mas copas");
+            
         }
+           
         else //no supera el limite
         {
             
             alcoholSangre = alcoholSangre + nombreCopa.getCantidad();//acumula alcohol en sangre tras beber copa
+            if(ultimaCopa == nombreCopa.getNombreCopa())
+            {
+                consciente =false;
+            }
+            else
+            {
+                ultimaCopa= nombreCopa.getNombreCopa();
+            }   
         }
         
         
@@ -64,5 +82,12 @@ public class Bebedor
                 System.out.println("No");
             }   
         }    
-    }       
+    } 
+    /**
+     * Metodo que devuelve si el bebedor esta consciente
+     */
+    public boolean getConsciente()
+    {
+        return consciente;
+    }    
 }
